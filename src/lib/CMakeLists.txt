@@ -9,5 +9,5 @@ add_library(${BOZV_PUBLIC} SHARED
     )
     
 target_link_libraries(${BOZV_PUBLIC}
-    datastruct random stddjb
+    unixonacid datastruct random stdcrypto stddjb
     )

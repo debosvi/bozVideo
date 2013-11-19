@@ -6,7 +6,7 @@
 
 #include "boz/bozv_internal_p.h"
 
-int boz_handle_close(bozv_handle_t *vh) {
+int bozv_handle_close(bozv_handle_t *vh) {
     int ret=-1;
     
     if(!vh || !(*vh))

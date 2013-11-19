@@ -15,6 +15,9 @@ include_directories (${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_subdirectory(src)
 
+# to be removed later
+set(BOZ_GLOBAL_TEST y)
+
 add_test_if_enable(test BOZ_GLOBAL_TEST)
 
 include(package/package.cmake)

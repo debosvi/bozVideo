@@ -44,7 +44,7 @@ int bozv_handle_open(bozv_handle_t *vh);
  * 
  * \note \p vh is reset to BOZV_HANDLE_ZERO on success
  */
-int boz_handle_close(bozv_handle_t *vh);
+int bozv_handle_close(bozv_handle_t *vh);
 
 #endif
 
