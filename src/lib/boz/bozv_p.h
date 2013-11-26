@@ -1,6 +1,6 @@
 /**
  * \file bozv_p.h
- * \defgroup BOZ_VIDEO_PRIVATE
+ * \defgroup BOZ_VIDEO_PRIVATE Boz video private API
  * @{
  */
 
@@ -9,7 +9,7 @@
 
 #include "boz-video.h"
 
-/**
+/*!
  * \struct bozv_handle_s
  * \brief Internal video handle storage.
  *

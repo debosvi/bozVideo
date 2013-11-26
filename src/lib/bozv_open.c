@@ -13,9 +13,9 @@ int bozv_handle_open(bozv_handle_t *vh) {
     if((*vh)!=BOZV_HANDLE_ZERO)
         return(errno=EINVAL,-1);
     
-    BOZDISCO_LOCK_MUTEX(g_video_main.mutex);
+    BOZVIDEO_LOCK_MUTEX(g_video_main.mutex);
     ret=gensetdyn_new (&g_video_main.handle, &idx);
-    BOZDISCO_UNLOCK_MUTEX(g_video_main.mutex);
+    BOZVIDEO_UNLOCK_MUTEX(g_video_main.mutex);
     
     if(ret<0) 
         return (errno=EIO,-1);

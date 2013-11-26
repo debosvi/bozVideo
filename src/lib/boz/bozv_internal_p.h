@@ -1,6 +1,6 @@
 /**
- * \file bozv_internal.h
- * \defgroup BOZ_VIDEO_INTERNAL Boz video private header
+ * \file bozv_internal_p.h
+ * \defgroup BOZ_VIDEO_INTERNAL Boz video internal API
  * @{
  */
 
@@ -16,26 +16,36 @@
 
 #include "boz/bozv_p.h"
 
-/**
+/*!
  * \struct bozvideo_s
  * \brief Global variables storage.
  *
- * bozv_handle_s is the only way to use global variables along boz-video public library
+ * bozv_handle_s is the only way to use global variables along boz-video public library.
  */
 typedef struct bozvideo_s bozvideo, bozvideo_t, *bozvideo_ref, *bozvideo_t_ref ;
 struct bozvideo_s {
-    unsigned int        magic;      /*!< Magic number computed at library loading */
-    pthread_mutex_t     mutex;      /*!< Section locking mutex for handles creation/deletion */
-    gensetdyn           handle;     /*!< Handle storage */
+    unsigned int        magic;      /*!< Magic number computed at library loading. */
+    pthread_mutex_t     mutex;      /*!< Section locking mutex for handles creation/deletion. */
+    gensetdyn           handle;     /*!< Handle storage. */
 };
 
+/*!
+ * \brief \ref bozvideo_s default values.
+ * This value must be the init values for handle storage data.
+ */
 #define BOZVIDEO_MAIN_ZERO { 0, PTHREAD_MUTEX_INITIALIZER, GENSETDYN_INIT(struct bozv_handle_s, 4, 0, 1) }
 
 extern bozvideo const g_video_main_zero ;
 extern bozvideo g_video_main;
 
-#define BOZDISCO_LOCK_MUTEX(x)      pthread_mutex_lock(&x)
-#define BOZDISCO_UNLOCK_MUTEX(x)    pthread_mutex_unlock(&x)
+/*!
+ * \brief Mutex locking macro.
+ */
+#define BOZVIDEO_LOCK_MUTEX(x)      pthread_mutex_lock(&x)
+/*!
+ * \brief Mutex unlocking macro.
+ */
+#define BOZVIDEO_UNLOCK_MUTEX(x)    pthread_mutex_unlock(&x)
 
 /*!
  * \param[in] p used as \ref bozvideo_s handle reference
