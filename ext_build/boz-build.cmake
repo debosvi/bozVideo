@@ -8,6 +8,7 @@ link_directories (${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
 set(CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE ON) 
 include(${CMAKE_CURRENT_LIST_DIR}/boz-vars.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/boz-qt5.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/boz-doc.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/boz-test-macros.cmake)
 
