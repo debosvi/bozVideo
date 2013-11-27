@@ -67,7 +67,10 @@ QObject* BozWebpage::createPlugin(const QString & classid, const QUrl & url, con
         pw->setURI(uri);
         //! allows to access from javascript to HTML id set
         _view->page()->mainFrame()->addToJavaScriptWindowObject(idstr, pw);
-        return pw->getWidget();
+        QWidget *wid = pw->getWidget();
+
+        qDebug("player widget(%p)", wid);
+        return wid;
     }
     
     return NULL;
