@@ -21,7 +21,9 @@ QBozQtAVVidPlayer::~QBozQtAVVidPlayer() {
 
 QWidget* QBozQtAVVidPlayer::getWidget() {
     qDebug("%s", __FUNCTION__);
-    return new QWidget();
+    QWidget *pw = new QWidget();
+    pw->setStyleSheet("background-color: black;");
+    return pw;
 }
 
 void QBozQtAVVidPlayer::play() {
