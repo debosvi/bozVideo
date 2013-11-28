@@ -4,11 +4,13 @@ include_directories(${Qt5WebKitWidgets_INCLUDE_DIRS})
 
 set(FACT_HDRS 
     BozWebpage.h
+    BozBrowser.h
     )
 
 set(FACT_SRCS 
     main.cpp 
     BozWebpage.cpp
+    BozBrowser.cpp
     )
 
 QT5_WRAP_CPP(${FACTORYNAME}_HEADERS_MOC ${FACT_HDRS})

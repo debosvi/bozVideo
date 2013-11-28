@@ -16,6 +16,9 @@
  * \brief BOZ Webpage plugin factory
  */
  
+#ifndef _QBOZWEBPAGE_H_
+#define _QBOZWEBPAGE_H_
+
 #include <QWebPage>
 #include <QWebView>
 
@@ -32,6 +35,11 @@ public:
      *  \param url : URI to load
      */
      BozWebpage(QUrl &url);
+
+    /*!
+     *  \brief Get private view instance
+     */
+     QWebView* view();
 
 protected slots:
     /*!
@@ -54,8 +62,10 @@ private:
     /*!
      *  \brief Specific viewer
      */
-    QWebView *_view;
+    QWebView* _view;
 };
+
+#endif //  _QBOZWEBPAGE_H_
 
 /**
  * @}

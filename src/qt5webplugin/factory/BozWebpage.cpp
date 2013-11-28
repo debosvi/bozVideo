@@ -23,8 +23,17 @@
 #include "BozWebpage.h"
 #include "QBozQtAVVidPlayer.h"
 
-BozWebpage::BozWebpage(QUrl &url) : _view(0) {
+BozWebpage::BozWebpage(QUrl &url) : 
+    _view(Q_NULLPTR) {
     _view = new QWebView();
+    if(!_view) {
+        qDebug("%s, unable to creta webview", __FUNCTION__);
+        return;
+    }
+
+    qDebug("%s, view (%p)", __FUNCTION__, _view);
+
+    _view->setAttribute(Qt::WA_DeleteOnClose, true);
     _view->setPage(this);
     _view->page()->settings()->setAttribute(QWebSettings::PluginsEnabled, true);
     _view->page()->settings()->setAttribute(QWebSettings::JavascriptEnabled, true);
@@ -44,7 +53,7 @@ BozWebpage::BozWebpage(QUrl &url) : _view(0) {
 QObject* BozWebpage::createPlugin(const QString & classid, const QUrl & url, const QStringList & paramNames, const QStringList & paramValues) {
     int idx=paramNames.indexOf(QString("id"));
     QString idstr = paramValues[idx];
-
+    QWebView *_view = (QWebView*)view();
     Q_UNUSED(url)
 
     qDebug("create class %s", classid.toLatin1().data());
@@ -76,10 +85,13 @@ QObject* BozWebpage::createPlugin(const QString & classid, const QUrl & url, con
     return NULL;
 }
 
-void BozWebpage::adjustTitle(QString title )
-{
-    qDebug("%s", __FUNCTION__);
+void BozWebpage::adjustTitle(QString title) {
+    qDebug("%s, view (%p)", __FUNCTION__, _view);
     _view->setWindowTitle(_view->title() + " : " + title);
+}
+
+QWebView* BozWebpage::view() {
+    return _view;
 }
 
 /**
