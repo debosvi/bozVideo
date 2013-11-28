@@ -25,7 +25,7 @@ target_link_libraries(${PLUGINPLAYER_NAME}
 #    stddjb
 #    pthread
     ${Qt5Widgets_LIBRARIES}
-#     QtAV
+    QtAV
 )
 
 install(TARGETS ${PLUGINPLAYER_NAME} LIBRARY DESTINATION ${LIBRARY_INSTALL_DIR})

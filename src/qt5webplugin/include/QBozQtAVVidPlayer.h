@@ -4,6 +4,11 @@
 
 #include "QBozAbstractVidPlayer.h"
 
+namespace QtAV {
+    class AVPlayer;
+    class WidgetRenderer;
+}
+
 namespace BOZ {
 
 class QBozQtAVVidPlayer : public QBozAbstractVidPlayer {
@@ -21,9 +26,16 @@ public Q_SLOTS:
     void capture();
     void record();
     void applyfilter(qint8 type, bool b);
+
+private Q_SLOTS:
+    void onPlay();
+    void onPause(bool b);
+    void onStop();
+    void onRecord(bool b);
     
-protected:
-    
+private:
+    QtAV::AVPlayer* _player;
+    QtAV::WidgetRenderer* _renderer; 
 };
 
 } // NAMESPACE
