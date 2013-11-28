@@ -6,8 +6,10 @@ namespace BOZ {
     
 QBozQtAVVidPlayer::QBozQtAVVidPlayer(QObject *parent) : 
     QBozAbstractVidPlayer(parent), 
+    _play(0), _rec(0),
     _player(Q_NULLPTR), _renderer(Q_NULLPTR) {
     qDebug("%s", __PRETTY_FUNCTION__);
+    memset(_filts, 0, nb_filters*sizeof(bool));
     
 }
 
@@ -38,28 +40,34 @@ QWidget* QBozQtAVVidPlayer::getWidget() {
 
 void QBozQtAVVidPlayer::play() {
     qDebug("%s", __PRETTY_FUNCTION__);
-    if(_player)
+    if(_player) {
+        _play=0;
         _player->play(_uri);
+    }
 }
 
 void QBozQtAVVidPlayer::onPlay() {
     qDebug("%s", __PRETTY_FUNCTION__);
+    _play=1;
     Q_EMIT started();
 }
 
 void QBozQtAVVidPlayer::pause() {
     qDebug("%s", __PRETTY_FUNCTION__);
-    if(_player)
-        _player->togglePause();
+    if(_player) {
+        _player->pause(_play);
+    }
 }
 
 void QBozQtAVVidPlayer::onPause(bool b) {
     qDebug("%s", __PRETTY_FUNCTION__);
+    _play=0;
     Q_EMIT paused(b);
 }
 
 void QBozQtAVVidPlayer::onStop() {
     qDebug("%s", __PRETTY_FUNCTION__);
+    _play=0;
     Q_EMIT stopped();
 }
 
@@ -68,20 +76,27 @@ void QBozQtAVVidPlayer::capture() {
 }
 
 void QBozQtAVVidPlayer::record() {
-    qDebug("%s", __PRETTY_FUNCTION__);
+    qDebug("%s, state(%d)", __PRETTY_FUNCTION__, _rec);
+    onRecord(!_rec);
 }
 
 void QBozQtAVVidPlayer::onRecord(bool b) {
-    qDebug("%s", __PRETTY_FUNCTION__);
-    Q_EMIT recording(b);
+    qDebug("%s, state(%d)", __PRETTY_FUNCTION__, b);
+    _rec=b%2;
+    Q_EMIT recording(_rec);
 }
 
-void QBozQtAVVidPlayer::seek(qint64 time) {
-    qDebug("%s, time(%lld)", __PRETTY_FUNCTION__, time);
+#define GENERATE_FILTER(x) \
+void QBozQtAVVidPlayer::toggleFilter##x() {  \
+    qint8 idx=x-1;  \
+    _filts[idx]=!_filts[idx];  \
+    qDebug("%s, filter%d, new value(%d)", __PRETTY_FUNCTION__, x, _filts[idx]);  \
+    Q_EMIT onFilter##x(_filts[idx]);  \
 }
 
-void QBozQtAVVidPlayer::applyfilter(qint8 type, bool b) {
-    qDebug("%s, type(%d), value(%d)", __PRETTY_FUNCTION__, type, b);
-}
+GENERATE_FILTER(1)
+GENERATE_FILTER(2)
+GENERATE_FILTER(3)
+GENERATE_FILTER(4)
 
 } // NAMESPACE

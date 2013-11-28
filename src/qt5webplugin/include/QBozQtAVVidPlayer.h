@@ -22,10 +22,12 @@ public:
 public Q_SLOTS:
     void play();
     void pause();
-    void seek(qint64 time);
     void capture();
     void record();
-    void applyfilter(qint8 type, bool b);
+    void toggleFilter1();
+    void toggleFilter2();
+    void toggleFilter3();
+    void toggleFilter4();
 
 private Q_SLOTS:
     void onPlay();
@@ -34,8 +36,11 @@ private Q_SLOTS:
     void onRecord(bool b);
     
 private:
+    bool _play, _rec;
+    bool _filts[4];
     QtAV::AVPlayer* _player;
     QtAV::WidgetRenderer* _renderer; 
+    const static qint8 nb_filters =4;
 };
 
 } // NAMESPACE
