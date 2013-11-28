@@ -15,8 +15,15 @@ QBozQtAVVidPlayer::QBozQtAVVidPlayer(QObject *parent) :
 
 QBozQtAVVidPlayer::~QBozQtAVVidPlayer() {
     qDebug("%s", __PRETTY_FUNCTION__);
-
-    
+    if(_player) {
+        _player->setRenderer(Q_NULLPTR);
+        if(_renderer) {      
+            _renderer->deleteLater();
+            _renderer = Q_NULLPTR;
+        }
+        _player->deleteLater();
+        _player = Q_NULLPTR;
+     }
 }
 
 // void QBozQtAVVidPlayer::setURI(QString &uri) {
@@ -53,7 +60,7 @@ void QBozQtAVVidPlayer::onPlay() {
 }
 
 void QBozQtAVVidPlayer::pause() {
-    qDebug("%s", __PRETTY_FUNCTION__);
+    qDebug("%s: play state(%d)", __PRETTY_FUNCTION__, _play);
     if(_player) {
         _player->pause(_play);
     }
@@ -61,7 +68,7 @@ void QBozQtAVVidPlayer::pause() {
 
 void QBozQtAVVidPlayer::onPause(bool b) {
     qDebug("%s", __PRETTY_FUNCTION__);
-    _play=0;
+    _play=!b;
     Q_EMIT paused(b);
 }
 
