@@ -20,9 +20,20 @@ int main(int ac, char **av) {
         exit(EXIT_FAILURE);
     }
     
+    fprintf(stdout, "New entry(%s)\n", entry);
     fprintf(stdout, "Press key to continue\n");
     getchar();
-
+    
+    ret=bozv_entry_seturi(entry, "rtsp://192.168.0.1/test");
+    if (ret < 0) {
+        fprintf(stderr, "Unable to create uri, errno(%d/%s)\n",
+                errno, strerror(errno));
+        exit(EXIT_FAILURE);
+    }
+    
+    fprintf(stdout, "Press key to continue\n");
+    getchar();
+    
     ret = bozv_entry_delete(entry);
     if (ret < 0) {
         fprintf(stderr, "Unable to close video handle, errno(%d/%s)\n",

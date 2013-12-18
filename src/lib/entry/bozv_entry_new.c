@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
+#include <sys/stat.h>
 
 #include "boz-video-entry.h"
 #include "boz/bozv_entry_internal_p.h"
@@ -13,7 +15,7 @@ int bozv_entry_new(char** const name) {
     int fd=-1;
     
     if(!name)
-        return(errno=EFAULT,-1);
+        return (errno=EFAULT,-1);
     
     if(_bozv_entry_check_rootpath()<0)
         return -1;
@@ -27,6 +29,9 @@ int bozv_entry_new(char** const name) {
     }
 
     close(fd);
+    unlink(newname);
+    mkdir(newname, 0775);
+    
     (*name) = newname;
     return (errno=0,0);
 }

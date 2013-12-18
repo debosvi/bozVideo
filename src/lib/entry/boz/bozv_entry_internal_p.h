@@ -4,14 +4,12 @@
  * @{
  */
 
-#ifndef _BOZV_INTERNAL_P_H_
-#define _BOZV_INTERNAL_P_H_
+#ifndef _BOZV_ENTRY_INTERNAL_P_H_
+#define _BOZV_ENTRY_INTERNAL_P_H_
 
+#include <stdint.h>
 #include <errno.h>
 #include <pthread.h>
-#include <skarnet/gensetdyn.h>
-#include <skarnet/random.h>
-#include <skarnet/tai.h>
 
 enum {
     BOZV_ENTRY_TMPPATH_OK = (1<<0),

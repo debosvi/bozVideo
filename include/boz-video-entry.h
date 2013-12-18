@@ -58,6 +58,24 @@ int bozv_entry_new(char** const name);
  */
 int bozv_entry_delete(const char* const name);
 
+
+/*!
+ * \brief Prepare new entry.
+ * 
+ * \param[in] name entry name
+ * \param[in] uri uri like (rtsp://toto or file://file.mpg)
+ * \return error code
+ * \retval 0 on success
+ * \retval -1 on failure (errno set accordingly)
+ *
+ * errno managed:
+ * - 0 on success
+ * - EFAULT if \p name or \p uri are NULL.
+ * - EINVAL if \p name doesn't exist.
+ * 
+ */
+int bozv_entry_seturi(const char* const name, const char* const uri);
+
 #endif //_BOZ_VIDEO_ENTRIES_H_
 
 /**

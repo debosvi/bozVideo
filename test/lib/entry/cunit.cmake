@@ -10,6 +10,7 @@ set(CU_TEST_SOURCES
 add_executable(${CU_BOZV_ENTRY_TEST_NAME} 
     ${CU_TEST_SOURCES}
     )
+    
 target_link_libraries(${CU_BOZV_ENTRY_TEST_NAME}
     bozv_entry
     cunit

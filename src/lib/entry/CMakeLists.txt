@@ -7,9 +7,10 @@ add_library(${BOZV_ENTRY_PUBLIC} SHARED
     bozv_entry_set_rootpath.c
     bozv_entry_new.c
     bozv_entry_delete.c
+    bozv_entry_seturi.c
     )
     
 target_link_libraries(${BOZV_ENTRY_PUBLIC}
-#     unixonacid datastruct random stdcrypto 
-    stddjb
+#      datastruct   
+    unixonacid random stdcrypto stddjb
     )
