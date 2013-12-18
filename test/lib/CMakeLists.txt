@@ -1,3 +1,3 @@
 
-include(basic.cmake)
-include(cunit.cmake)
+add_subdirectory(main)
+add_subdirectory(entry)
