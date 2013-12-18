@@ -1,6 +1,6 @@
 
 find_path(BOZ_QT5_QMAKE_PATH qmake
-	PATHS /opt/qt51 /usr/lib/i386-linux-gnu/qt5
+	PATHS /opt/qt52 /opt/qt51 /usr/lib/i386-linux-gnu/qt5
 	PATH_SUFFIXES bin
 	DOC "Find QT5 Qmake tool"
 	NO_DEFAULT_PATH 
